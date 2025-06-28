@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "private": true,
+  "scripts": {
+    "dev": "cargo watch -x run",
+    "build": "cargo build --release",
+    "cargo:build": "cargo build",
+    "cargo:test": "cargo test",
+    "test": "cargo test",
+    "lint": "cargo clippy",
+    "check-types": "cargo check",
+    "generate:openapi": "cargo run --bin generate-openapi"
+  }
+}

@@ -1,0 +1,17 @@
+# Build outputs
+dist/
+build/
+.output/
+
+# Generated files
+src/routeTree.gen.ts
+*.gen.ts
+
+# Dependencies
+node_modules/
+
+# TanStack Router cache
+.tanstack/
+
+# Vite generated
+public/vite.svg 

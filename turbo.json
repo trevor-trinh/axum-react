@@ -1,0 +1,50 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", "build/**", "out/**", "target/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"]
+    },
+    "generate:openapi": {
+      "inputs": ["apps/backend/src/**/*.rs", "apps/backend/Cargo.toml"],
+      "outputs": ["../../packages/api-types/types/openapi.json"]
+    },
+    "generate:types": {
+      "dependsOn": ["backend#generate:openapi"],
+      "inputs": ["packages/api-types/types/openapi.json"],
+      "outputs": ["types/api.ts"]
+    },
+    "forge:build": {
+      "inputs": ["src/**/*.sol", "foundry.toml"],
+      "outputs": ["out/**"]
+    },
+    "forge:test": {
+      "dependsOn": ["forge:build"],
+      "inputs": ["src/**/*.sol", "test/**/*.sol", "foundry.toml"]
+    },
+    "cargo:build": {
+      "inputs": ["src/**/*.rs", "Cargo.toml", "Cargo.lock"],
+      "outputs": ["target/**"]
+    },
+    "cargo:test": {
+      "dependsOn": ["cargo:build"],
+      "inputs": ["src/**/*.rs", "Cargo.toml", "Cargo.lock"]
+    }
+  }
+}

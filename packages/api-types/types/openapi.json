@@ -1,0 +1,199 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Token Minting API",
+    "description": "API for minting stock tokens on-chain",
+    "license": {
+      "name": ""
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "routes::health"
+        ],
+        "operationId": "health_check",
+        "responses": {
+          "200": {
+            "description": "Health check response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mint": {
+      "post": {
+        "tags": [
+          "minting"
+        ],
+        "operationId": "mint_tokens",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MintRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully initiated mint",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MintResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or unsupported ticker",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MintError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiResponse": {
+        "type": "object",
+        "required": [
+          "message",
+          "timestamp"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "MintError": {
+        "type": "object",
+        "required": [
+          "error",
+          "message",
+          "timestamp"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "MintRequest": {
+        "type": "object",
+        "required": [
+          "ticker",
+          "exchange",
+          "amount",
+          "to_address"
+        ],
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Amount of tokens to mint",
+            "minimum": 0
+          },
+          "exchange": {
+            "type": "string",
+            "description": "Exchange where the stock is traded (e.g., \"NASDAQ\", \"NYSE\")"
+          },
+          "ticker": {
+            "type": "string",
+            "description": "Stock ticker symbol (e.g., \"AAPL\", \"TSLA\")"
+          },
+          "to_address": {
+            "type": "string",
+            "description": "Destination address for the minted tokens"
+          }
+        }
+      },
+      "MintResponse": {
+        "type": "object",
+        "required": [
+          "message",
+          "ticker",
+          "exchange",
+          "amount",
+          "to_address",
+          "contract_address",
+          "tx_hash",
+          "timestamp"
+        ],
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "contract_address": {
+            "type": "string",
+            "description": "Internal contract address for this ticker"
+          },
+          "exchange": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "to_address": {
+            "type": "string"
+          },
+          "tx_hash": {
+            "type": "string",
+            "description": "Transaction hash (placeholder for now)"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "api",
+      "description": "General API endpoints"
+    },
+    {
+      "name": "minting",
+      "description": "Token minting operations"
+    }
+  ]
+}
