@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  // TODO: random bug that cannot hardrefresh. if we add react() cannot load backend at all?
   plugins: [tsconfigPaths(), tanstackStart(), tailwindcss()],
   resolve: {
     alias: {
