@@ -1,6 +1,6 @@
+import type { components } from "@repo/api-types";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import type { components } from "@repo/api-types";
 
 export const Route = createFileRoute("/")({
   component: Index,
