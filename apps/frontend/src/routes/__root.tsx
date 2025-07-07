@@ -3,7 +3,7 @@ import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-r
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 
-import indexCss from "../index.css?url";
+import indexCss from "../styles/index.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
