@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [tsconfigPaths(), tanstackStart(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "."),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   envPrefix: "PUBLIC",
