@@ -1,14 +1,13 @@
 # Axum-React Turborepo Template
 
-A modern fullstack application template built with Turborepo, featuring React frontend with Vite and Rust backend with Axum.
+A modern fullstack application template built with Turborepo, featuring React frontend with TanStack Start (SSR) and Rust backend with Axum.
 
 ## Project Structure
 
 ```
 apps/
-├── frontend/          # React + Vite frontend
+├── frontend/          # React + TanStack Start (SSR) frontend
 ├── backend/           # Axum Rust API
-└── contracts/         # Foundry smart contracts (optional)
 
 packages/
 └── api-types/         # Shared TypeScript types
@@ -37,7 +36,7 @@ bun run dev
 
 | Layer        | Technology                        | Purpose                                     |
 | ------------ | --------------------------------- | ------------------------------------------- |
-| **Frontend** | React 18 + Vite + TanStack Router | Modern, fast UI with client-side routing    |
+| **Frontend** | React 18 + TanStack Start (SSR)  | Modern, fast UI with server-side rendering |
 | **Backend**  | Rust + Axum + Serde               | High-performance API with type safety       |
 | **Types**    | OpenAPI → TypeScript              | Automatic type sharing across stack         |
 | **Build**    | Turborepo + Bun                   | Efficient monorepo with intelligent caching |
@@ -72,14 +71,6 @@ source ~/.cargo/env
 cargo install cargo-watch
 ```
 
-### Contracts (Optional)
-
-```bash
-# Install Foundry (only if using smart contracts)
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-```
-
 ## Quick Start
 
 ```bash
@@ -97,7 +88,7 @@ bun run dev
 
 Access the app at:
 
-- Frontend: `http://localhost:3000`
+- Frontend (SSR): `http://localhost:3000`
 - Backend API: `http://localhost:3001`
 - Swagger UI: `http://localhost:3001/api/docs`
 
@@ -117,10 +108,6 @@ bun run build --filter=frontend  # Build specific app
 bun run test                  # Run all tests
 bun run lint                  # Lint code
 bun run format                # Format code
-
-# Contracts (if using)
-bun run contracts:build       # Compile contracts
-bun run contracts:test        # Test contracts
 
 # Type Generation
 bun run generate:types        # Generate TypeScript types from backend
