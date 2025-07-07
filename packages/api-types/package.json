@@ -8,7 +8,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "typecheck": "tsc --noEmit",
-    "generate:types": "openapi-typescript ./types/openapi.json -o types/api.ts"
+    "generate:types": "openapi-typescript ./types/openapi.json -o types/api.ts && bun run build"
   },
   "devDependencies": {
     "typescript": "5.8.2",

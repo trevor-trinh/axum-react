@@ -5,7 +5,6 @@
     "module": "CommonJS",
     "lib": ["ES2022"],
     "outDir": "./dist",
-    "rootDir": "types",
     "tsBuildInfoFile": "./.turbo/tsconfig.tsbuildinfo",
     "composite": true,
     "declaration": true,
@@ -23,6 +22,6 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true
   },
-  "include": ["types/**/*"],
+  "include": ["types/**/*", "index.ts"],
   "exclude": ["dist", "node_modules", ".turbo"]
 }

@@ -3,7 +3,40 @@
  * Do not make direct changes to the file.
  */
 
-export type paths = Record<string, never>;
+export interface paths {
+    "/api/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["health_check"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/mint": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["mint_tokens"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+}
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
@@ -11,6 +44,39 @@ export interface components {
             message: string;
             /** Format: int64 */
             timestamp: number;
+        };
+        MintError: {
+            error: string;
+            message: string;
+            /** Format: int64 */
+            timestamp: number;
+        };
+        MintRequest: {
+            /**
+             * Format: int64
+             * @description Amount of tokens to mint
+             */
+            amount: number;
+            /** @description Exchange where the stock is traded (e.g., "NASDAQ", "NYSE") */
+            exchange: string;
+            /** @description Stock ticker symbol (e.g., "AAPL", "TSLA") */
+            ticker: string;
+            /** @description Destination address for the minted tokens */
+            to_address: string;
+        };
+        MintResponse: {
+            /** Format: int64 */
+            amount: number;
+            /** @description Internal contract address for this ticker */
+            contract_address: string;
+            exchange: string;
+            message: string;
+            ticker: string;
+            /** Format: int64 */
+            timestamp: number;
+            to_address: string;
+            /** @description Transaction hash (placeholder for now) */
+            tx_hash: string;
         };
     };
     responses: never;
@@ -20,4 +86,58 @@ export interface components {
     pathItems: never;
 }
 export type $defs = Record<string, never>;
-export type operations = Record<string, never>;
+export interface operations {
+    health_check: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Health check response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse"];
+                };
+            };
+        };
+    };
+    mint_tokens: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MintRequest"];
+            };
+        };
+        responses: {
+            /** @description Successfully initiated mint */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MintResponse"];
+                };
+            };
+            /** @description Invalid request or unsupported ticker */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MintError"];
+                };
+            };
+        };
+    };
+}
