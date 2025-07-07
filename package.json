@@ -8,14 +8,10 @@
     "format": "turbo run format",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "setup": "git submodule update --init --recursive",
-    "submodule:status": "git submodule status",
     "generate:types": "turbo run generate:types",
     "backend:dev": "turbo run dev --filter=backend",
     "backend:build": "turbo run cargo:build --filter=backend",
     "backend:test": "turbo run cargo:test --filter=backend",
-    "contracts:build": "turbo run forge:build --filter=contracts",
-    "contracts:test": "turbo run forge:test --filter=contracts",
     "frontend:dev": "turbo run dev --filter=frontend"
   },
   "devDependencies": {
